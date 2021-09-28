@@ -14,19 +14,18 @@ def sign(x):
         return -1
 
 def sign2(x):
+    speed = 2
     if abs(x) < 0.5:
         return 0
-    elif x > 1:
-        return 2
-    elif x == 1.0:
-        return 1
-    elif x == -1.0:
-        return -1
+    elif abs(x) >= 1 and abs(x) <= speed:
+        return int(x)
+    elif x > speed:
+        return speed
     else:
-        return -2
+        return -speed
 
 class Agent:
-    """random walking angent"""
+    """random walking agent"""
     def __init__(self, x, y, is_living_dead = False):
         self.is_living_dead = is_living_dead
         self.x, self.y = x, y
@@ -107,7 +106,7 @@ agents.append(Agent(10, 10, True))
 fig = plt.figure()
 ims = []
 
-for t in range(100):
+while True:
     # plt.cla()
     for i in range(len(agents)):
         agents[i].next_move(agents[0:i] + agents[(i + 1):len(agents)])
@@ -116,6 +115,10 @@ for t in range(100):
     col = [agents[i].col for i in range(len(agents))]
     im = plt.scatter(x, y, marker= ".", c = col)
     ims.append([im]) 
+    
+    if all([c == "red" for c in col]):
+        break
+
 
 ani = animation.ArtistAnimation(fig, ims)
 # ani.save('agend_living_dead.gif', writer="pillow")

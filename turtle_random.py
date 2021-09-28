@@ -4,11 +4,12 @@ import random
 n_turtles = 10
 wn = turtle.Screen()
 
-kames = [turtle.Turtle() for i in range(n_turtles - 1)]
+kames = [turtle.Turtle() for i in range(n_turtles)]
+colours=["red","blue","yellow","brown","black","purple","green"]
 
-for t in kames:
+for i, t in enumerate(kames):
     t.shape('turtle')
-    t.color('green')
+    t.color(colours[i%7])
     t.speed(0)
     t.goto(random.randrange(-100, 100), random.randrange(-100, 100))
 
